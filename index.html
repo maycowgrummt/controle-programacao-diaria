@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Programação Diária | Darnel</title>
 <link rel="icon" type="image/png" href="img/favicon-64.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta name="theme-color" content="#004f86" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#04213a" media="(prefers-color-scheme: dark)">
 <!-- Aplica o tema escolhido (claro/escuro) antes de desenhar, para não piscar -->
@@ -88,6 +90,7 @@
       <button class="btn-topo" id="dToday" title="Ir para hoje"><i data-lucide="calendar-check"></i>Hoje</button>
     </div>
     <div class="topo-usuario">
+      <button class="btn-topo hidden" id="btnInstalar" title="Instalar como aplicativo no computador"><i data-lucide="download"></i><span class="tx-opc">Instalar app</span></button>
       <button class="btn-topo" id="btnUsers" title="Usuários"><i data-lucide="users"></i></button>
       <button type="button" class="tema-switch" data-acao="tema" role="switch" aria-label="Modo escuro"></button>
       <div class="usuario-chip">
@@ -149,6 +152,7 @@ Object.assign(window, {
 <script defer src="js/importacao.js"></script>
 <script defer src="js/ferramentas.js"></script>
 <script defer src="js/usuarios.js"></script>
+<script defer src="js/pwa.js"></script>
 <script defer src="js/app.js"></script>
 </body>
 </html>

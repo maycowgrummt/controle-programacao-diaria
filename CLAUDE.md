@@ -20,6 +20,7 @@ Webapp (HTML + CSS + JavaScript puro, sem npm nem build) que substitui a planilh
 - `js/importacao.js`: botão "Importar do WMS": lê a planilha do Korber One, acha o cabeçalho sozinho, mapeia colunas por sinônimos (`MAP_CAMPOS`), data da programação vem do começo do campo "Comentarios", prévia antes de gravar. Reimportar atualiza só os campos do WMS.
 - `js/ferramentas.js`: Exportar Excel (aba atual) e "Limpar dia" (só admin, para testes: apaga cargas/coletas da data e o histórico delas).
 - `js/usuarios.js`: cadastro de usuários (só admin), usando uma segunda conexão do Firebase para não derrubar o login do admin.
+- Aplicativo instalável (PWA), igual ao Controle de Ocorrências: `manifest.webmanifest` (nome, ícones, cores), `sw.js` (ajudante: **não** guarda o sistema em cache, sempre busca na internet; só mostra `offline.html` se cair a conexão; ao mudar o `sw.js`, aumentar a `VERSAO`), ícones `img/icone-*.png` e `img/apple-touch-icon.png`. `js/pwa.js`: botão "Instalar app" (`#btnInstalar`, aparece só quando o navegador permite instalar). Só funciona hospedado (GitHub Pages), não abrindo o arquivo direto.
 - `js/app.js`: carregado por último; liga o ouvinte de login (`onAuthStateChanged`).
 - `firestore.rules`: regras de segurança do Firestore (quem pode mudar qual campo). **A cada mudança, colar no Console do Firebase e publicar.** Ao criar um campo novo numa seção, incluir o nome dele na lista do setor (`camposPlan`, `camposTransp`, `camposFat`, `camposOp`, `palCad`, `palFat`, `palOp`).
 - `img/`: logo Darnel e favicon.
