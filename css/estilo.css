@@ -431,3 +431,66 @@ main{max-width:2400px}
   .topo,.toolbar,.tabs,.drawer,.overlay,.rodape{display:none!important}
   .tablewrap{max-height:none;overflow:visible;box-shadow:none}
 }
+
+/* ---------- Manual do usuário (js/manual.js) ---------- */
+.faixa-manual{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:8px 10px 8px 14px;background:var(--marca-suave);border:1px solid color-mix(in srgb,var(--marca) 30%,transparent);border-radius:12px;color:var(--texto);animation:surgir .3s ease-out}
+.faixa-manual > .lucide{color:var(--marca);width:22px;height:22px}
+.faixa-manual span{flex:1}
+.modal .box.manual{max-width:1080px;height:calc(100vh - 60px);display:flex;flex-direction:column}
+.box.manual .hd h2{flex:none;white-space:nowrap}
+.man-busca{position:relative;flex:1;max-width:420px;margin-left:auto}
+.man-busca .lucide{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--texto-3);pointer-events:none}
+.man-busca input{padding-left:34px}
+.man-corpo{flex:1;min-height:0;display:grid;grid-template-columns:240px minmax(0,1fr)}
+.man-menu{display:flex;flex-direction:column;gap:2px;padding:12px 10px;overflow-y:auto;background:var(--superficie-2);border-right:1px solid var(--borda)}
+.man-menu-item{display:flex;align-items:center;gap:9px;text-align:left;padding:9px 11px;border-radius:9px;background:none;border:0;color:var(--texto-2);font-size:13.5px;font-weight:600;transition:background .15s,color .15s}
+.man-menu-item .lucide{width:17px;height:17px;color:var(--texto-3)}
+.man-menu-item:hover{background:var(--superficie-3);color:var(--texto)}
+.man-menu-item.ativo{background:var(--marca-suave);color:var(--marca-forte);box-shadow:inset 3px 0 0 var(--marca)}
+.man-menu-item.ativo .lucide{color:var(--marca)}
+.man-menu-item.apagado{opacity:.35}
+.man-conteudo{position:relative;overflow-y:auto;padding:8px 28px 40px;line-height:1.6}
+.man-secao{padding:18px 0 22px;border-bottom:1px solid var(--borda)}
+.man-secao:last-of-type{border-bottom:0}
+.man-secao h3{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:800;margin-bottom:10px}
+.man-secao h3 .lucide{width:34px;height:34px;padding:7px;border-radius:10px;background:var(--marca-suave);color:var(--marca)}
+.man-secao h4{font-size:14.5px;font-weight:700;margin:18px 0 6px;color:var(--marca-forte)}
+.man-secao p{margin:0 0 10px;color:var(--texto-2)}
+.man-secao p strong,.man-secao li strong,.man-secao td strong{color:var(--texto)}
+.man-ic{width:15px!important;height:15px!important;vertical-align:-3px;color:var(--marca)}
+.man-passos,.man-lista{margin:0 0 12px;padding-left:22px;color:var(--texto-2);display:flex;flex-direction:column;gap:5px}
+.man-passos li::marker{color:var(--marca);font-weight:800}
+.man-lista li::marker{color:var(--marca)}
+.man-tabela{width:100%;border-collapse:separate;border-spacing:0;margin:6px 0 14px;font-size:13.5px;border:1px solid var(--borda);border-radius:10px;overflow:hidden}
+.man-tabela th{background:var(--superficie-2);text-align:left;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--texto-3);padding:9px 12px;border-bottom:1px solid var(--borda)}
+.man-tabela td{padding:9px 12px;border-bottom:1px solid var(--borda);vertical-align:top;color:var(--texto-2)}
+.man-tabela tr:last-child td{border-bottom:0}
+.man-tabela td:first-child{width:34%;color:var(--texto)}
+.man-dica{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border-radius:10px;margin:8px 0 12px!important;background:var(--marca-suave);border:1px solid color-mix(in srgb,var(--marca) 25%,transparent);color:var(--texto)!important}
+.man-dica .lucide{width:17px;height:17px;margin-top:2px;color:var(--marca)}
+.man-atencao{background:color-mix(in srgb,var(--alerta) 14%,var(--superficie));border-color:color-mix(in srgb,var(--alerta) 45%,transparent)}
+.man-atencao .lucide{color:#c27c00}
+.man-fluxo{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:4px 0 12px}
+.man-fluxo > .lucide{color:var(--texto-3);width:16px;height:16px}
+.man-setor{display:inline-block;background:var(--c);color:#fff;font-weight:700;font-size:12.5px;padding:3px 10px;border-radius:999px}
+.man-btn{display:inline-flex;align-items:center;gap:5px;color:#fff;font-weight:800;font-size:12px;padding:4px 10px;border-radius:8px;letter-spacing:.04em}
+.man-btn .man-ic{color:#fff}
+.man-btn.ok{background:var(--sucesso)} .man-btn.stop{background:var(--perigo)}
+.man-faq{border:1px solid var(--borda);border-radius:10px;margin-bottom:8px;background:var(--superficie)}
+.man-faq summary{cursor:pointer;padding:10px 14px;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+.man-faq summary::-webkit-details-marker{display:none}
+.man-faq summary::before{content:"+";display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:var(--marca-suave);color:var(--marca);font-weight:800;flex:none}
+.man-faq[open] summary::before{content:"−"}
+.man-faq > div{padding:0 14px 12px 42px;color:var(--texto-2)}
+.man-vazio{text-align:center;color:var(--texto-3);padding:40px 0}
+@media (max-width:860px){
+  .modal .box.manual{height:calc(100dvh - 24px)}
+  .box.manual .hd{flex-wrap:wrap}
+  .man-busca{order:3;flex-basis:100%;max-width:none}
+  .man-corpo{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+  .man-menu{flex-direction:row;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid var(--borda);padding:8px}
+  .man-menu-item{white-space:nowrap;flex:none;padding:7px 10px}
+  .man-menu-item.ativo{box-shadow:inset 0 -2px 0 var(--marca)}
+  .man-conteudo{padding:4px 16px 32px}
+  .man-tabela td:first-child{width:auto}
+}
