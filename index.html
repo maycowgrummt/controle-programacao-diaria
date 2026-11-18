@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programação Diária | Darnel</title>
+<link rel="icon" type="image/png" href="img/favicon-64.png">
+<meta name="theme-color" content="#004f86" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#04213a" media="(prefers-color-scheme: dark)">
+<!-- Aplica o tema escolhido (claro/escuro) antes de desenhar, para não piscar -->
+<script>
+  (function(){ try{
+    var t = localStorage.getItem('programacao_tema');
+    if (t === 'claro') document.documentElement.setAttribute('data-theme','light');
+    if (t === 'escuro') document.documentElement.setAttribute('data-theme','dark');
+  }catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<!-- Ícones (mesma biblioteca dos outros sistemas Darnel) -->
+<script src="https://unpkg.com/lucide@1.70.0"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+<div id="boot" class="carregando">Conectando…</div>
+
+<!-- ===================== LOGIN ===================== -->
+<section id="login" class="hidden">
+  <button type="button" class="tema-switch tema-switch-login" data-acao="tema" role="switch" aria-label="Modo escuro"></button>
+  <div class="login-card">
+    <img src="img/logo-darnel.png" alt="Darnel" class="login-logo">
+    <form id="loginForm" autocomplete="on">
+      <h1>Programação Diária</h1>
+      <p class="sub">Controle de cargas · Planejamento, Transporte, Faturamento e Operação</p>
+      <div class="fields">
+        <div><label for="lgUser">Usuário</label><input id="lgUser" autocomplete="username" required></div>
+        <div><label for="lgPass">Senha</label><input id="lgPass" type="password" autocomplete="current-password" required></div>
+        <p class="login-err" id="lgErr"></p>
+        <button class="btn primary" type="submit"><i data-lucide="log-in"></i>Entrar</button>
+        <p style="text-align:center;margin:0" id="setupLinkWrap" class="hidden">
+          <button type="button" class="link" id="setupLink">Primeiro acesso: configurar administrador</button>
+        </p>
+      </div>
+    </form>
+    <form class="hidden" id="setupForm">
+      <h1>Configurar administrador</h1>
+      <p class="sub">Crie o primeiro usuário. Ele terá acesso total e cadastrará os demais.</p>
+      <div class="fields">
+        <div><label>Nome completo</label><input id="suNome" required></div>
+        <div><label>Usuário (login)</label><input id="suUser" required placeholder="ex.: maycow"></div>
+        <div><label>Senha (mín. 6 caracteres)</label><input id="suPass" type="password" minlength="6" required></div>
+        <p class="login-err" id="suErr"></p>
+        <button class="btn primary" type="submit"><i data-lucide="shield-check"></i>Criar administrador</button>
+        <p style="text-align:center;margin:0"><button type="button" class="link" id="setupBack">Voltar</button></p>
+      </div>
+    </form>
+  </div>
+  <footer class="rodape-login">Controle de Programação Diária • Desenvolvido por <strong>Maycow Grummt</strong> • Darnel Group © 2026</footer>
+</section>
+
+<!-- ===================== SEM ACESSO ===================== -->
+<section id="noaccess" class="center hidden">
+  <div>
+    <i data-lucide="lock" style="width:44px;height:44px;color:var(--texto-3)"></i>
+    <h2 style="color:var(--texto);margin:10px 0 6px">Acesso não liberado</h2>
+    <p>Seu usuário está desativado ou ainda não tem perfil. Fale com o administrador.</p>
+    <button class="btn" id="noaccessOut"><i data-lucide="log-out"></i>Sair</button>
+  </div>
+</section>
+
+<!-- ===================== SISTEMA ===================== -->
+<div id="app" class="hidden">
+  <header class="topo">
+    <div class="topo-marca">
+      <img src="img/logo-darnel.png" alt="Darnel" class="topo-logo">
+      <div class="topo-textos">
+        <span class="topo-titulo">Programação Diária</span>
+        <span class="topo-sub">Controle de cargas e coletas</span>
+      </div>
+    </div>
+    <div class="datenav">
+      <button class="btn-topo" id="dPrev" title="Dia anterior"><i data-lucide="chevron-left"></i></button>
+      <input type="date" id="dDate" aria-label="Data da programação">
+      <button class="btn-topo" id="dNext" title="Próximo dia"><i data-lucide="chevron-right"></i></button>
+      <button class="btn-topo" id="dToday" title="Ir para hoje"><i data-lucide="calendar-check"></i>Hoje</button>
+    </div>
+    <div class="topo-usuario">
+      <button class="btn-topo" id="btnUsers" title="Usuários"><i data-lucide="users"></i></button>
+      <button type="button" class="tema-switch" data-acao="tema" role="switch" aria-label="Modo escuro"></button>
+      <div class="usuario-chip">
+        <span id="uAvatar" class="avatar"></span>
+        <span class="usuario-textos"><span id="uNome" class="usuario-nome"></span><span id="uSetor" class="usuario-setor"></span></span>
+      </div>
+      <button class="btn-topo" id="btnLogout" title="Sair"><i data-lucide="log-out"></i></button>
+    </div>
+  </header>
+  <main>
+    <div class="kpis" id="kpis"></div>
+    <nav class="tabs" id="tabs"></nav>
+    <div class="toolbar">
+      <div class="busca"><i data-lucide="search"></i><input id="fSearch" placeholder="Buscar carga, nome, doca, placa, romaneio…"></div>
+      <select id="fEtapa"><option value="">Todas as etapas</option></select>
+      <label class="chk"><input type="checkbox" id="fMine"> Minhas pendências</label>
+      <label class="chk" id="fPendWrap"><input type="checkbox" id="fPend" checked> Incluir pendentes de outros dias</label>
+      <span class="spacer"></span>
+      <button class="btn secondary" id="btnNova"><i data-lucide="plus"></i><span>Nova carga</span></button>
+      <button class="btn primary" id="btnImport"><i data-lucide="file-up"></i>Importar do WMS</button>
+      <button class="btn" id="btnExport" title="Exportar Excel"><i data-lucide="file-spreadsheet"></i><span class="tx-opc">Exportar Excel</span></button>
+      <button class="btn danger hidden" id="btnLimpar" title="Somente administrador: apagar os dados desta data"><i data-lucide="trash-2"></i><span class="tx-opc">Limpar dia</span></button>
+    </div>
+    <div class="tablewrap"><table class="grid" id="grid"></table></div>
+  </main>
+  <footer class="rodape">
+    <span class="rodape-sistema"><i data-lucide="calendar-range"></i>Controle de Programação Diária</span>
+    <span class="rodape-sep" aria-hidden="true">•</span>
+    <span>Desenvolvido por <strong>Maycow Grummt</strong></span>
+    <span class="rodape-sep" aria-hidden="true">•</span>
+    <span>Darnel Group © 2026</span>
+  </footer>
+</div>
+
+<div id="drawerRoot"></div>
+<div id="modalRoot"></div>
+<div id="toast"></div>
+
+<!-- Scripts: a ORDEM importa (todos compartilham as mesmas variáveis). -->
+<script defer src="js/config.js"></script>
+<!-- Firebase: carrega a biblioteca e deixa as funções disponíveis para os outros arquivos -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, getDocs, collection, query, where, onSnapshot, writeBatch, serverTimestamp, orderBy, limit, deleteDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const fbApp = initializeApp(firebaseConfig);
+Object.assign(window, {
+  initializeApp, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword,
+  doc, getDoc, getDocs, collection, query, where, onSnapshot, writeBatch, serverTimestamp, orderBy, limit, deleteDoc, updateDoc, setDoc,
+  auth: getAuth(fbApp), db: getFirestore(fbApp),
+});
+</script>
+<script defer src="js/utils.js"></script>
+<script defer src="js/auth.js"></script>
+<script defer src="js/painel.js"></script>
+<script defer src="js/cronometro.js"></script>
+<script defer src="js/ficha.js"></script>
+<script defer src="js/cadastro.js"></script>
+<script defer src="js/importacao.js"></script>
+<script defer src="js/ferramentas.js"></script>
+<script defer src="js/usuarios.js"></script>
+<script defer src="js/app.js"></script>
+</body>
+</html>

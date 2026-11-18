@@ -1,0 +1,15 @@
+# Planilhas exportadas do WMS (dados reais da empresa) NUNCA vão para o GitHub
+*.xlsx
+*.xls
+*.csv
+
+# Chaves de conta de serviço do Firebase
+*-firebase-adminsdk-*.json
+service-account*.json
+.firebase/
+node_modules/
+
+# Arquivos do Windows / OneDrive
+desktop.ini
+Thumbs.db
+~$*

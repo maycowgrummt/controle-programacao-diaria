@@ -1,0 +1,94 @@
+rules_version = '2';
+// Regras do app Programação Diária.
+// Copie todo este conteúdo em: Console Firebase > Firestore Database > Regras > Publicar
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function perfilPath() { return /databases/$(database)/documents/usuarios/$(request.auth.uid); }
+    function perfil() { return get(perfilPath()).data; }
+    function ativo() { return signedIn() && exists(perfilPath()) && perfil().ativo == true; }
+    function setor() { return perfil().setor; }
+    function isAdmin() { return ativo() && setor() == 'admin'; }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+
+    function meta() { return ['etapa', 'concluida', 'atualizadoPor', 'atualizadoPorUid', 'atualizadoEm']; }
+    function camposPlan() {
+      return ['data', 'carga', 'nome', 'doca', 'cifFob', 'pedidos', 'cubagem', 'peso', 'valor', 'uf',
+              'transportadora', 'obsPlanejamento', 'cidade', 'estadoWms', 'osLogisfrete', 'categoria'];
+    }
+    function camposTransp() {
+      return ['transpColeta', 'cubagemVeiculo'];
+    }
+    function camposFat() {
+      return ['chegada', 'placa', 'motorista', 'inicioFat', 'fimFat', 'responsavelFat', 'romaneio',
+              'obsFaturamento', 'cronoFat'];
+    }
+    function camposOp() {
+      return ['status', 'inicioCarreg', 'fimCarreg', 'paletizado', 'qtdPaletes', 'equipe',
+              'sobrouEspaco', 'espacoM3', 'obsOperacao', 'crono'];
+    }
+
+    // Marca que o primeiro administrador já foi criado
+    match /config/setup {
+      allow read: if true;
+      allow create: if signedIn()
+        && getAfter(perfilPath()).data.setor == 'admin';
+      allow update, delete: if false;
+    }
+
+    match /usuarios/{uid} {
+      allow read: if ativo() || (signedIn() && request.auth.uid == uid);
+      allow create: if isAdmin()
+        || (signedIn() && request.auth.uid == uid
+            && !exists(/databases/$(database)/documents/config/setup)
+            && existsAfter(/databases/$(database)/documents/config/setup)
+            && request.resource.data.setor == 'admin'
+            && request.resource.data.ativo == true);
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    match /cargas/{id} {
+      allow read: if ativo();
+      allow create, delete: if ativo() && setor() in ['admin', 'planejamento'];
+      allow update: if ativo() && (
+        setor() == 'admin'
+        || (setor() == 'planejamento' && changed().hasOnly(camposPlan().concat(meta())))
+        || (setor() == 'transporte'   && changed().hasOnly(camposTransp().concat(meta())))
+        || (setor() == 'faturamento'  && changed().hasOnly(camposFat().concat(meta())))
+        || (setor() == 'operacao'     && changed().hasOnly(camposOp().concat(meta())))
+      );
+
+      match /historico/{h} {
+        allow read: if ativo();
+        allow create: if ativo() && request.resource.data.uid == request.auth.uid;
+        allow update: if false;
+        allow delete: if isAdmin();   // só o admin, ao limpar um dia
+      }
+    }
+
+    // Coletas paletizadas (exceções lançadas manualmente)
+    function palCad()  { return ['data', 'transportadora', 'obs', 'notas']; }
+    function palFat()  { return ['chegada', 'placa', 'motorista']; }
+    function palOp()   { return ['inicio', 'termino', 'paletes', 'equipe', 'obsOp', 'crono']; }
+
+    match /paletizadas/{id} {
+      allow read: if ativo();
+      allow create, delete: if ativo() && setor() in ['admin', 'planejamento', 'faturamento'];
+      allow update: if ativo() && (
+        setor() == 'admin'
+        || (setor() == 'planejamento' && changed().hasOnly(palCad().concat(meta())))
+        || (setor() == 'faturamento'  && changed().hasOnly(palCad().concat(palFat()).concat(meta())))
+        || (setor() == 'operacao'     && changed().hasOnly(palOp().concat(meta())))
+      );
+
+      match /historico/{h} {
+        allow read: if ativo();
+        allow create: if ativo() && request.resource.data.uid == request.auth.uid;
+        allow update: if false;
+        allow delete: if isAdmin();   // só o admin, ao limpar um dia
+      }
+    }
+  }
+}
