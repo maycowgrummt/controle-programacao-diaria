@@ -18,7 +18,7 @@ service cloud.firestore {
               'transportadora', 'obsPlanejamento', 'cidade', 'estadoWms', 'osLogisfrete', 'categoria'];
     }
     function camposTransp() {
-      return ['transpColeta', 'cubagemVeiculo'];
+      return ['transpColeta', 'cubagemVeiculo', 'previsaoChegada'];
     }
     function camposFat() {
       return ['chegada', 'placa', 'motorista', 'inicioFat', 'fimFat', 'responsavelFat', 'romaneio',

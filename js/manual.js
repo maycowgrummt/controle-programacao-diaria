@@ -123,6 +123,7 @@ const SECOES_MANUAL = [
     ${mLista([
       "<strong>Transportadora que se apresentou:</strong> quem realmente veio buscar (o sistema sugere nomes já usados).",
       "<strong>Cubagem do veículo (m³):</strong> capacidade do veículo que chegou.",
+      "<strong>Previsão chegada:</strong> horário em que a transportadora avisou que o veículo deve chegar.",
     ])}
     <p>Com a cubagem do veículo preenchida, o sistema calcula a <strong>ocupação</strong> (cubagem da carga ÷ cubagem do veículo), que aparece na tabela e na ficha.</p>
     ${mDica("Com <strong>Minhas pendências</strong> ligado, aparecem só as cargas sem transportadora ou sem cubagem do veículo.")}`
@@ -197,7 +198,7 @@ const SECOES_MANUAL = [
   { id:"permissoes", titulo:"Quem pode fazer o quê", icone:"shield-check", html:()=>
     mTabela(["Setor","Pode"],[
       [mSetor("#15803d","Planejamento"), "Importar do WMS, criar carga extra/frigorífico, editar a seção Planejamento, mudar de dia, excluir carga, criar coleta paletizada."],
-      [mSetor("#7c3aed","Transporte"), "Transportadora que se apresentou e cubagem do veículo."],
+      [mSetor("#7c3aed","Transporte"), "Transportadora que se apresentou, cubagem do veículo e previsão de chegada."],
       [mSetor("#0072bc","Faturamento"), "Chegada do veículo, emissão (cronômetro, responsável, romaneio, observação), criar coleta paletizada e registrar a chegada dela."],
       [mSetor("#ea580c","Operação"), "Status, cronômetro do carregamento, paletes, equipe, sobra de espaço e observação; carregamento das coletas paletizadas."],
       [mSetor("#475569","Consulta"), "Só visualiza tudo, sem editar."],

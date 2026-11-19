@@ -22,7 +22,7 @@ $("#btnExport").onclick = ()=>{
     data = rows.map(c=>{ const t=tempos(c); return {
       "Data":brData(c.data), "Tipo":CAT_LBL[catOf(c)], "Etapa":ETAPA_LBL[etapaDe("carga",c)], "Carga":c.carga, "Nome da carga":c.nome, "Doca":c.doca, "CIF/FOB":c.cifFob,
       "UF":c.uf||"", "Transportadora":c.transportadora||"", "Pedidos":c.pedidos||0, "Cubagem":c.cubagem||0, "Peso":c.peso||0, "Valor":c.valor||0,
-      "Transp. que se apresentou":c.transpColeta||"", "Cubagem veículo":c.cubagemVeiculo??"", "Ocupação %":ocupacao(c)==null?"":Math.round(ocupacao(c)),
+      "Transp. que se apresentou":c.transpColeta||"", "Previsão chegada":c.previsaoChegada||"","Cubagem veículo":c.cubagemVeiculo??"", "Ocupação %":ocupacao(c)==null?"":Math.round(ocupacao(c)),
       "Chegada":c.chegada||"", "Placa":c.placa||"", "Motorista":c.motorista||"",
       "Status operação":c.status?STATUS_LBL[c.status]:"", "Início carreg.":c.inicioCarreg||"", "Fim carreg.":c.fimCarreg||"",
       "Paletizado":sn(c.paletizado), "Qtd paletes":c.qtdPaletes??"", "Equipe":c.equipe||"", "Sobrou espaço":sn(c.sobrouEspaco), "Espaço livre":c.espacoM3||"", "Obs operação":c.obsOperacao||"",

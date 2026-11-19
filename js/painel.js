@@ -196,7 +196,7 @@ const COLS = [
   {g:"ge",k:"etapa",l:"Etapa"},
   {g:"gp",k:"carga",l:"Carga",sep:1},{g:"gp",k:"nome",l:"Nome da carga"},{g:"gp",k:"doca",l:"Doca"},{g:"gp",k:"cifFob",l:"CIF/FOB"},
   {g:"gp",k:"pedidos",l:"Ped.",n:1},{g:"gp",k:"cubagem",l:"Cub.",n:1},{g:"gp",k:"peso",l:"Peso",n:1},
-  {g:"gx",k:"transpColeta",l:"Transportadora",sep:1},{g:"gx",k:"cubagemVeiculo",l:"Cub. veículo",n:1},{g:"gx",k:"ocupacao",l:"Ocup.",n:1},
+  {g:"gx",k:"transpColeta",l:"Transportadora",sep:1},{g:"gx",k:"previsaoChegada",l:"Previsão chegada"},{g:"gx",k:"cubagemVeiculo",l:"Cub. veículo",n:1},{g:"gx",k:"ocupacao",l:"Ocup.",n:1},
   {g:"gc",k:"chegada",l:"Chegada",sep:1},{g:"gc",k:"placa",l:"Placa"},
   {g:"go",k:"status",l:"Status",sep:1},{g:"go",k:"crono",l:"Cronômetro"},{g:"go",k:"inicioCarreg",l:"Início"},{g:"go",k:"fimCarreg",l:"Fim"},{g:"go",k:"paletizado",l:"Palet."},
   {g:"go",k:"equipe",l:"Equipe"},{g:"go",k:"sobrouEspaco",l:"Espaço"},{g:"go",k:"obsOperacao",l:"Obs"},

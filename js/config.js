@@ -48,6 +48,7 @@ const SECOES = [
   { id:"transporte", cls:"transporte", icon:"truck", titulo:"Transporte · Coleta", btn:"transporte", roles:["admin","transporte"], campos:[
     {k:"transpColeta",l:"Transportadora que se apresentou",t:"text",list:"dlTransp",w:2},
     {k:"cubagemVeiculo",l:"Cubagem do veículo (m³)",t:"num"},
+    {k:"previsaoChegada",l:"Previsão chegada",t:"time"},
   ]},
   { id:"chegada", cls:"chegada", icon:"door-open", titulo:"Faturamento · Chegada do veículo", btn:"chegada", roles:["admin","faturamento"], campos:[
     {k:"chegada",l:"Hora de chegada",t:"time"},
