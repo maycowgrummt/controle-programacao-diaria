@@ -1,7 +1,7 @@
-/* Ficha lateral da carga/coleta: seções por setor, salvar, histórico, excluir. */
+// ficha lateral (drawer) da carga / coleta
 "use strict";
 
-/* ================= DRAWER ================= */
+// drawer
 function getItem(tipo, id){
   return tipo==="pal" ? (S.palDia.get(id) || S.palPend.get(id)) : (S.doDia.get(id) || S.pend.get(id));
 }
@@ -126,7 +126,7 @@ function fmtVal(k,v){
   if (f.t==="date") return brData(v);
   return v;
 }
-// adicionar/remover linhas de nota (drawer e modal)
+// add/remove nota
 document.addEventListener("click", e=>{
   const add = e.target.closest(".add-nota");
   if (add){

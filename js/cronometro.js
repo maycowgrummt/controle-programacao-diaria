@@ -1,13 +1,13 @@
-/* Cronômetros START / STOP: carregamento (Operação) e emissão (Faturamento). Não existe pausa. */
+// cronometros start/stop (operacao e faturamento) - sem pausa
 "use strict";
 
-// Cada cronômetro: onde fica guardado (campo), quais horários preenche (ini/fim) e em qual seção da ficha aparece (sec).
+// campo onde salva, campos de inicio/fim e secao da ficha
 const CRONOS = {
   op:  {tipo:"carga", campo:"crono",    ini:"inicioCarreg", fim:"fimCarreg", sec:"operacao",    nome:"carregamento", acaoIni:"Carregando",  acaoFim:"Carregamento finalizado"},
   fat: {tipo:"carga", campo:"cronoFat", ini:"inicioFat",    fim:"fimFat",    sec:"faturamento", nome:"faturamento",  acaoIni:"Faturando",   acaoFim:"Faturamento finalizado"},
   pal: {tipo:"pal",   campo:"crono",    ini:"inicio",       fim:"termino",   sec:"pop",         nome:"carregamento", acaoIni:"Carregando",  acaoFim:"Carregamento finalizado"},
 };
-// qual cronômetro pertence a cada seção da ficha
+// secao -> cronometro
 const CRONO_DA_SECAO = { operacao:"op", faturamento:"fat", pop:"pal" };
 const cronoDe = (k, c) => c[CRONOS[k].campo];
 const cronoMs = (k, c) => { const x = cronoDe(k,c); if (!x) return 0; return (x.acum||0) + (x.estado==="rodando" ? Math.max(0, Date.now()-(x.desde||Date.now())) : 0); };
@@ -18,7 +18,7 @@ function cronoBotoes(k, c, mini){
   const est = cronoEstado(k,c);
   if (!podeCrono(k) || est==="parado" || est==="manual") return "";
   const b = (acao, cls, ic, txt) => `<button type="button" class="btn ${mini?"sm ":""}${cls} crono-btn" data-acao="${acao}" data-k="${k}" data-id="${esc(c.id)}" title="${txt}">${icone(ic)}${mini?"":txt}</button>`;
-  // "pausado" só existe em cargas antigas, de antes de a pausa ser retirada
+  // "pausado" = cargas antigas, de quando tinha pausa
   if (est==="novo") return b("start","success","play","START");
   return (est==="pausado" ? b("start","success","play","RETOMAR") : "") + b("stop","parar","square","STOP");
 }
@@ -46,7 +46,7 @@ function cronoBoxHTML(k, c){
     <div class="crono-acoes">${cronoBotoes(k,c,false)}</div>
   </div>`;
 }
-// atualiza os relógios que estão rodando a cada segundo
+// tick 1s
 setInterval(()=>{
   document.querySelectorAll("[data-crono]").forEach(el=>{
     const [k,id] = el.dataset.crono.split("|"); const c = getItem(CRONOS[k].tipo, id);
@@ -85,7 +85,7 @@ async function cronoAcao(k, id, acao){
   meus().forEach(el=>el.disabled=true);
   try {
     await b.commit();
-    // se o formulário da seção estiver sendo editado, só ajusta os horários nele
+    // form com edicao pendente: so atualiza os horarios
     const form = document.querySelector(`.drawer .sec[data-sec="${F.sec}"][data-dirty]`);
     if (form) for (const [kk,v] of Object.entries(diff)) if (form.elements[kk]) form.elements[kk].value = v;
     toast(acao==="start" ? "Cronômetro iniciado" : `${F.acaoFim} · ${fmtCrono(crono.acum)}`);

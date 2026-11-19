@@ -1,7 +1,7 @@
-/* Exportar Excel e Limpar dia (admin). */
+// exportar excel + limpar dia
 "use strict";
 
-/* ---------- Exportar ---------- */
+// exportar
 $("#btnExport").onclick = ()=>{
   const sn = v => v==="sim"?"SIM":v==="nao"?"NÃO":"";
   let data, nomeAba;
@@ -37,7 +37,7 @@ $("#btnExport").onclick = ()=>{
   XLSX.writeFile(wb, `programacao_${S.data}${sufixo}.xlsx`);
 };
 
-/* ---------- Limpar dia (admin, para testes) ---------- */
+// limpar dia - so p/ testes
 $("#btnLimpar").onclick = ()=>{
   if (S.perfil?.setor !== "admin") return;
   const cargas = [...S.doDia.values()];
@@ -69,7 +69,7 @@ $("#btnLimpar").onclick = ()=>{
     ];
     const btn = $("#lmGo"); btn.disabled = true; btn.textContent = "Excluindo…";
     try{
-      // junta tudo (histórico + documento) e apaga em lotes de até 450 operações
+      // batch tem limite de 500, uso 450
       const refs = [];
       for (const [col,id] of alvos){
         const ref = doc(db,col,id);

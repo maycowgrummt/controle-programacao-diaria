@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <meta name="theme-color" content="#004f86" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#04213a" media="(prefers-color-scheme: dark)">
-<!-- Aplica o tema escolhido (claro/escuro) antes de desenhar, para não piscar -->
+<!-- aplica o tema antes de renderizar -->
 <script>
   (function(){ try{
     var t = localStorage.getItem('programacao_tema');
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<!-- Ícones (mesma biblioteca dos outros sistemas Darnel) -->
+<!-- icones -->
 <script src="https://unpkg.com/lucide@1.70.0"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <link rel="stylesheet" href="css/estilo.css">
@@ -29,7 +29,7 @@
 
 <div id="boot" class="carregando">Conectando…</div>
 
-<!-- ===================== LOGIN ===================== -->
+<!-- LOGIN -->
 <section id="login" class="hidden">
   <button type="button" class="tema-switch tema-switch-login" data-acao="tema" role="switch" aria-label="Modo escuro"></button>
   <div class="login-card">
@@ -63,7 +63,7 @@
   <footer class="rodape-login">Controle de Programação Diária • Desenvolvido por <strong>Maycow Grummt</strong> • Darnel Group © 2026</footer>
 </section>
 
-<!-- ===================== SEM ACESSO ===================== -->
+<!-- SEM ACESSO -->
 <section id="noaccess" class="center hidden">
   <div>
     <i data-lucide="lock" style="width:44px;height:44px;color:var(--texto-3)"></i>
@@ -73,7 +73,7 @@
   </div>
 </section>
 
-<!-- ===================== SISTEMA ===================== -->
+<!-- SISTEMA -->
 <div id="app" class="hidden">
   <header class="topo">
     <div class="topo-marca">
@@ -102,7 +102,7 @@
     </div>
   </header>
   <main>
-    <!-- Primeiro acesso neste aparelho: convite para ler o manual (some depois de abrir ou fechar) -->
+    <!-- aviso do manual (1a vez) -->
     <div class="faixa-manual hidden" id="faixaManual"><i data-lucide="book-open"></i><span><strong>Novo por aqui?</strong> Veja o manual com o passo a passo de cada setor: importar do WMS, cronômetros, faturamento e mais.</span><button class="btn primary sm" id="btnAbrirManualFaixa">Abrir manual</button><button class="btn-fechar" id="btnFecharFaixaManual" title="Fechar"><i data-lucide="x"></i></button></div>
     <div class="kpis" id="kpis"></div>
     <nav class="tabs" id="tabs"></nav>
@@ -132,9 +132,9 @@
 <div id="modalRoot"></div>
 <div id="toast"></div>
 
-<!-- Scripts: a ORDEM importa (todos compartilham as mesmas variáveis). -->
+<!-- ordem importa -->
 <script defer src="js/config.js"></script>
-<!-- Firebase: carrega a biblioteca e deixa as funções disponíveis para os outros arquivos -->
+<!-- firebase (expoe as funcoes no window pros outros scripts) -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";

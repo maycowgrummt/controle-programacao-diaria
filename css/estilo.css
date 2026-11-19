@@ -1,7 +1,4 @@
-/* =========================================================
-   VISUAL DA PROGRAMAÇÃO DIÁRIA — estilo Corporativo Darnel
-   Cores no :root (claro) e repetidas no tema escuro (os dois blocos).
-   ========================================================= */
+/* estilo - programacao diaria (padrao darnel) */
 :root{
   color-scheme: light;
   --marca:#0072bc; --marca-forte:#005a96; --marca-clara:#1b95d6; --marca-suave:#e6f2fb;
@@ -56,7 +53,7 @@
   --sombra:0 1px 2px rgba(0,0,0,.5); --sombra-media:0 4px 14px rgba(0,0,0,.45); --sombra-alta:0 20px 44px rgba(0,0,0,.65);
 }
 
-/* ---------- Base ---------- */
+/* Base */
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
 body{background:var(--fundo);color:var(--texto);font-family:var(--fonte);font-size:14px;line-height:1.45;-webkit-font-smoothing:antialiased;transition:background-color .25s,color .25s}
@@ -69,7 +66,7 @@ h1,h2,h3{margin:0;line-height:1.25;letter-spacing:-.01em}
 .lucide{width:18px;height:18px;stroke-width:2;flex:none}
 .muted{color:var(--texto-3)}
 
-/* ---------- Campos ---------- */
+/* Campos */
 input,select,textarea{width:100%;min-width:0;padding:8px 11px;color:var(--texto);background:var(--superficie);border:1px solid var(--borda);border-radius:10px;transition:border-color .15s,box-shadow .15s,background .25s}
 input:hover,select:hover,textarea:hover{border-color:var(--borda-forte)}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--marca);box-shadow:0 0 0 3px color-mix(in srgb,var(--marca) 22%,transparent)}
@@ -79,7 +76,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--marca);padding:0}
 textarea{resize:vertical}
 label{display:block;font-size:12px;color:var(--texto-2);margin-bottom:4px;font-weight:600}
 
-/* ---------- Botões ---------- */
+/* Botões */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 15px;border-radius:10px;border:1px solid transparent;font-weight:600;white-space:nowrap;position:relative;overflow:hidden;
   background:var(--superficie);color:var(--texto-2);border-color:var(--borda);
   transition:background .15s,border-color .15s,transform .12s,box-shadow .15s,filter .15s,color .15s}
@@ -132,7 +129,7 @@ label{display:block;font-size:12px;color:var(--texto-2);margin-bottom:4px;font-w
 /* botão "Agora" dos horários */
 .btn.now{color:var(--marca-forte);background:var(--marca-suave);border-color:color-mix(in srgb,var(--marca) 22%,transparent)}
 
-/* ---------- Interruptor de tema ---------- */
+/* Interruptor de tema */
 .tema-switch{position:relative;flex:none;width:66px;height:34px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:space-between;padding:0 9px;color:#fff;transition:background .25s}
 .tema-switch:hover{background:rgba(255,255,255,.26)}
 .tema-switch .lucide{width:15px;height:15px;position:relative;z-index:1;transition:color .25s,opacity .25s}
@@ -145,7 +142,7 @@ label{display:block;font-size:12px;color:var(--texto-2);margin-bottom:4px;font-w
 .tema-switch.ligado .tema-lua{color:#ffd76a;opacity:1}
 .tema-switch-login{position:fixed;top:16px;right:16px;z-index:5}
 
-/* ---------- Login ---------- */
+/* Login */
 #login{min-height:100%;display:grid;place-items:center;grid-template-rows:1fr auto;gap:16px;padding:16px;
   background:radial-gradient(circle at 15% 20%,rgba(255,255,255,.14) 0,transparent 40%),radial-gradient(circle at 85% 80%,rgba(255,255,255,.10) 0,transparent 45%),var(--topo)}
 .login-card{width:100%;max-width:400px;background:var(--superficie);border-radius:20px;padding:32px 28px 24px;box-shadow:var(--sombra-alta);text-align:center;animation:subir .35s ease-out}
@@ -160,7 +157,7 @@ label{display:block;font-size:12px;color:var(--texto-2);margin-bottom:4px;font-w
 .carregando{min-height:100%;display:grid;place-items:center;color:var(--texto-3)}
 .carregando::before{content:"";display:block;width:30px;height:30px;margin:0 auto 10px;border-radius:50%;border:3px solid var(--borda);border-top-color:var(--marca);animation:girar .8s linear infinite}
 
-/* ---------- Topo ---------- */
+/* Topo */
 .topo{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:10px 20px;background:var(--topo);color:#fff;box-shadow:0 2px 10px rgba(0,40,80,.25);flex-wrap:wrap}
 .topo-marca{display:flex;align-items:center;gap:12px;margin-right:auto}
 .topo-logo{height:36px;border-radius:7px;box-shadow:0 0 0 1px rgba(255,255,255,.25)}
@@ -190,7 +187,7 @@ main{padding:20px;max-width:1800px;margin:0 auto;width:100%;animation:surgir .25
 .rodape-sistema .lucide{width:15px;height:15px;color:var(--marca)}
 .rodape-sep{color:var(--borda-forte)}
 
-/* ---------- KPIs ---------- */
+/* KPIs */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px;margin-bottom:18px}
 .kpi-rotulo,.kpi-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kpi{display:flex;align-items:center;gap:10px;background:var(--superficie);border:1px solid var(--borda);border-radius:var(--raio);padding:11px 12px;box-shadow:var(--sombra);transition:transform .15s,box-shadow .15s,border-color .15s;position:relative;overflow:hidden}
@@ -208,7 +205,7 @@ main{padding:20px;max-width:1800px;margin:0 auto;width:100%;animation:surgir .25
 .kpi.alerta .kpi-valor{color:var(--perigo)}
 .kpi.alerta .kpi-icone{animation:pulsar-kpi 2s ease-in-out infinite}
 
-/* ---------- Abas ---------- */
+/* Abas */
 .tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding:4px;background:var(--superficie);border:1px solid var(--borda);border-radius:14px;box-shadow:var(--sombra)}
 .tabs button{--t:var(--marca);display:inline-flex;align-items:center;gap:7px;border:0;background:none;padding:8px 14px;font-weight:600;color:var(--texto-2);border-radius:10px;white-space:nowrap;transition:background .15s,color .15s,transform .12s}
 .tabs button .lucide{width:17px;height:17px;color:var(--t);transition:transform .2s}
@@ -219,7 +216,7 @@ main{padding:20px;max-width:1800px;margin:0 auto;width:100%;animation:surgir .25
 .tabs button.on .cnt{background:var(--t);color:#fff}
 .tabs button.warn .cnt{background:var(--perigo);color:#fff;animation:pulsar-suave 2s ease-in-out infinite}
 
-/* ---------- Barra de ferramentas ---------- */
+/* Barra de ferramentas */
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
 .busca{position:relative;flex:1 1 240px;max-width:360px}
 .busca .lucide{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--texto-3);width:17px;height:17px;pointer-events:none}
@@ -228,7 +225,7 @@ main{padding:20px;max-width:1800px;margin:0 auto;width:100%;animation:surgir .25
 .chk{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:var(--texto-2);cursor:pointer;user-select:none;font-weight:500;margin:0}
 .spacer{flex:1}
 
-/* ---------- Tabela ---------- */
+/* Tabela */
 .tablewrap{background:var(--superficie);border:1px solid var(--borda);border-radius:var(--raio);box-shadow:var(--sombra);overflow:auto;max-height:calc(100vh - 330px);min-height:240px}
 table.grid{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
 .grid th,.grid td{padding:8px 10px;border-bottom:1px solid var(--borda);white-space:nowrap;text-align:left;vertical-align:middle}
@@ -271,7 +268,7 @@ table.grid{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
 .sim{color:var(--e-concluida);font-weight:800}.nao{color:var(--perigo);font-weight:800}
 .ocup-alta{color:var(--e-concluida);font-weight:800}.ocup-media{color:var(--e-aguardando);font-weight:800}.ocup-baixa{color:var(--perigo);font-weight:800}
 
-/* ---------- Painel lateral (drawer) ---------- */
+/* Painel lateral (drawer) */
 .overlay{position:fixed;inset:0;background:rgba(10,20,35,.5);backdrop-filter:blur(2px);z-index:40;animation:fade .2s}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(780px,100%);background:var(--fundo);z-index:41;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.25);animation:deslizar .28s cubic-bezier(.2,.9,.3,1)}
 .drawer header{background:var(--superficie);padding:16px 18px;border-bottom:1px solid var(--borda);display:flex;gap:12px;align-items:flex-start;border-top:4px solid var(--c,var(--marca))}
@@ -307,7 +304,7 @@ table.grid{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
 .durs div{background:var(--superficie);border:1px solid var(--borda);border-radius:10px;padding:8px 12px;font-size:11.5px;color:var(--texto-3);font-weight:600;box-shadow:var(--sombra)}
 .durs b{color:var(--texto);font-size:16px;display:block;font-weight:800;margin-top:1px}
 
-/* ---------- Janelas (modal) ---------- */
+/* Janelas (modal) */
 .modal{position:fixed;inset:0;z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:30px 16px;overflow:auto;background:rgba(10,20,35,.5);backdrop-filter:blur(2px);animation:fade .2s}
 .modal .box{background:var(--superficie);border:1px solid var(--borda);border-radius:16px;width:100%;max-width:1100px;box-shadow:var(--sombra-alta);animation:aparecer .25s ease-out;overflow:hidden}
 .modal .box.sm{max-width:580px}
@@ -340,7 +337,7 @@ details summary{cursor:pointer;color:var(--marca);font-weight:600;margin:8px 0}
 .users .avatar{width:28px;height:28px;box-shadow:none;display:inline-grid;vertical-align:middle;margin-right:8px}
 .badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700}
 
-/* ---------- Avisos ---------- */
+/* Avisos */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:60;display:flex;flex-direction:column;gap:8px;align-items:center}
 #toast div{display:flex;align-items:center;gap:8px;background:var(--superficie);color:var(--texto);border:1px solid var(--borda);border-left:4px solid var(--e-concluida);padding:10px 16px;border-radius:10px;box-shadow:var(--sombra-alta);font-size:13px;font-weight:500;animation:subir .25s ease-out}
 #toast div.err{border-left-color:var(--perigo)}
@@ -348,7 +345,7 @@ details summary{cursor:pointer;color:var(--marca);font-weight:600;margin:8px 0}
 #toast div.err .lucide{color:var(--perigo)}
 .center{min-height:100%;display:grid;place-items:center;padding:16px;text-align:center;color:var(--texto-3)}
 
-/* ---------- Animações ---------- */
+/* Animações */
 @keyframes surgir{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 @keyframes subir{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes aparecer{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
@@ -361,7 +358,7 @@ details summary{cursor:pointer;color:var(--marca);font-weight:600;margin:8px 0}
 @keyframes pulsar-btn{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--marca) 28%,transparent)}}
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
-/* ---------- Monitores grandes: usa toda a largura ---------- */
+/* Monitores grandes: usa toda a largura */
 main{max-width:2400px}
 @media (min-width:1200px){ .kpis{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)} }
 @media (min-width:1900px) and (min-height:950px){
@@ -369,7 +366,7 @@ main{max-width:2400px}
   .grid th,.grid td{padding:9px 12px}
   .nome{max-width:320px}
 }
-/* ---------- Notebooks (tela mais estreita ou mais baixa): modo compacto ---------- */
+/* Notebooks (tela mais estreita ou mais baixa): modo compacto */
 @media (max-width:1600px), (max-height:860px){
   .topo{padding:6px 16px;gap:12px}
   .topo-logo{height:30px}
@@ -432,7 +429,7 @@ main{max-width:2400px}
   .tablewrap{max-height:none;overflow:visible;box-shadow:none}
 }
 
-/* ---------- Manual do usuário (js/manual.js) ---------- */
+/* Manual do usuário (js/manual.js) */
 .faixa-manual{display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:8px 10px 8px 14px;background:var(--marca-suave);border:1px solid color-mix(in srgb,var(--marca) 30%,transparent);border-radius:12px;color:var(--texto);animation:surgir .3s ease-out}
 .faixa-manual > .lucide{color:var(--marca);width:22px;height:22px}
 .faixa-manual span{flex:1}

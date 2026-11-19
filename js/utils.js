@@ -1,10 +1,10 @@
-/* Funções de apoio: ícones, tema claro/escuro, datas, números, avisos (toast). */
+// funcoes de apoio
 "use strict";
 
-/* ================= ÍCONES E TEMA ================= */
+// icones e tema
 const icone = (nome, extra="") => `<i data-lucide="${nome}" ${extra}></i>`;
 (function iniciarIcones(){
-  if (!window.lucide) return;            // sem internet: botões continuam com texto
+  if (!window.lucide) return; // offline
   let agendado = false;
   const desenhar = () => { agendado = false; if (document.querySelector("i[data-lucide]")) lucide.createIcons(); };
   new MutationObserver(()=>{ if (!agendado){ agendado = true; requestAnimationFrame(desenhar); } })
@@ -32,7 +32,7 @@ document.querySelectorAll('[data-acao="tema"]').forEach(b=>{
 aplicarTema(temaAtual(), false);
 
 
-/* ================= UTIL ================= */
+// util
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const pad = n => String(n).padStart(2,"0");

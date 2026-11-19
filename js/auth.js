@@ -1,7 +1,7 @@
-/* Estado do sistema (dados em memória) e login / primeiro administrador. */
+// estado + login
 "use strict";
 
-/* ================= ESTADO ================= */
+// estado
 const S = {
   user:null, perfil:null, data:hojeISO(), aba:"todas",
   doDia:new Map(), pend:new Map(), palDia:new Map(), palPend:new Map(),
@@ -12,7 +12,7 @@ const pode = sec => !!S.perfil && sec.roles.includes(S.perfil.setor);
 const isPlan = () => ["admin","planejamento"].includes(S.perfil?.setor);
 const podeCriarPal = () => ["admin","planejamento","faturamento"].includes(S.perfil?.setor);
 
-/* ================= AUTH ================= */
+// login
 async function checaSetup(){
   try { const s = await getDoc(doc(db,"config","setup")); $("#setupLinkWrap").classList.toggle("hidden", s.exists()); }
   catch(err) {

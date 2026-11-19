@@ -1,7 +1,7 @@
-/* Cadastro de usuários (somente administrador). */
+// usuarios (so admin)
 "use strict";
 
-/* ---------- Usuários (admin) ---------- */
+
 let secApp = null;
 $("#btnUsers").onclick = ()=>{
   abrirModal(`${cabecalho("users","Usuários")}

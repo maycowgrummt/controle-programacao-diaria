@@ -1,7 +1,7 @@
-/* Importação da planilha exportada do WMS (Korber One). */
+// importacao do excel do korber
 "use strict";
 
-/* ---------- Importação Korber ---------- */
+// import
 const MAP_CAMPOS = [
   {k:"carga",l:"Nº carga *",syn:["carga","n carga","no carga","numero carga","numero da carga","nr carga"]},
   {k:"nome",l:"Nome da carga *",syn:["comentarios","comentario","nome","nome da carga","descricao","observacao"]},

@@ -1,4 +1,4 @@
-/* Início: carregado por último. Fica ouvindo o login e abre a tela certa. */
+// inicio do app (carregar por ultimo)
 "use strict";
 
 onAuthStateChanged(auth, async user=>{

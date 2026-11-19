@@ -1,7 +1,7 @@
-/* Janelas (modais) e cadastro manual de nova carga / nova coleta paletizada. */
+// modais, nova carga e nova coleta
 "use strict";
 
-/* ================= MODAIS ================= */
+// modal
 function abrirModal(html, sm=false){
   $("#modalRoot").innerHTML = `<div class="modal" id="mdBg"><div class="box ${sm?"sm":""}">${html}</div></div>`;
   $("#mdBg").addEventListener("mousedown", e=>{ if (e.target.id==="mdBg") fecharModal(); });
@@ -13,7 +13,7 @@ const metaNovo = () => ({ criadoPor:S.perfil.nome, criadoPorUid:S.perfil.uid, cr
   atualizadoPor:S.perfil.nome, atualizadoPorUid:S.perfil.uid, atualizadoEm:serverTimestamp() });
 const histNovo = acao => ({em:serverTimestamp(), por:S.perfil.nome, uid:S.perfil.uid, setor:S.perfil.setor, acao, campos:{}});
 
-/* ---------- Nova carga / nova coleta ---------- */
+// nova carga / coleta
 $("#btnNova").onclick = ()=> ehPal() ? novaColeta() : novaCarga();
 function novaCarga(){
   const catPadrao = ["extra","frigorifico"].includes(S.aba) ? S.aba : "extra";

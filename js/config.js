@@ -1,7 +1,7 @@
-/* Configuração do sistema: Firebase, setores, etapas, status e campos de cada seção da ficha. */
+// config geral: firebase, setores, etapas e campos de cada secao
 "use strict";
 
-/* ================= CONFIG ================= */
+// firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDFPvJcJuZxSRDVJcNewO2V0i5fTg1hu6M",
   authDomain: "controle-programacao-diaria.firebaseapp.com",
@@ -10,10 +10,10 @@ const firebaseConfig = {
   messagingSenderId: "110335329934",
   appId: "1:110335329934:web:e9169a995128a021e52bdf"
 };
-// Logins viram e-mails internos (ninguém recebe e-mail; é só o formato exigido pelo Firebase)
+// login vira email fake (firebase exige email)
 const EMAIL_DOMAIN = "controle-programacao-diaria.firebaseapp.com";
 
-/* ================= DOMÍNIO ================= */
+// dominio
 const SETORES = { admin:"Administrador", planejamento:"Planejamento", transporte:"Transporte", faturamento:"Faturamento", operacao:"Operação", consulta:"Consulta" };
 const COR_SETOR = { admin:"#4527a0", planejamento:"#15803d", transporte:"#7c3aed", faturamento:"#0072bc", operacao:"#ea580c", consulta:"#475569" };
 const ETAPAS = [
@@ -29,7 +29,7 @@ const CAT_LBL = Object.fromEntries(CATEGORIAS);
 const catOf = c => c.categoria || "programada";
 const SN = [["","—"],["sim","Sim"],["nao","Não"]];
 
-/* ---- Cargas ---- */
+// cargas
 const SECOES = [
   { id:"plan", cls:"plan", icon:"clipboard-list", titulo:"Planejamento", btn:"planejamento", del:true, roles:["admin","planejamento"], campos:[
     {k:"categoria",l:"Tipo de carga",t:"select",o:CATEGORIAS,def:"programada"},
@@ -82,7 +82,7 @@ function calcEtapa(c){
   return "planejada";
 }
 
-/* ---- Coletas paletizadas ---- */
+// paletizadas
 const SECOES_PAL = [
   { id:"pcad", cls:"plan", icon:"boxes", titulo:"Coleta paletizada · Cadastro", btn:"cadastro", del:true, roles:["admin","planejamento","faturamento"], campos:[
     {k:"data",l:"Data",t:"date"},

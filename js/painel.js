@@ -1,7 +1,7 @@
-/* Painel principal: abas, filtros, indicadores (KPIs) e tabelas de cargas e paletizadas. */
+// painel: abas, filtros, kpis e tabelas
 "use strict";
 
-/* ================= APP ================= */
+// app
 function iniciarApp(){
   show("app");
   $("#uNome").textContent = S.perfil.nome;
@@ -40,7 +40,7 @@ $("#dNext").onclick = ()=>setData(addDias(S.data,1));
 $("#dToday").onclick = ()=>setData(hojeISO());
 for (const id of ["#fSearch","#fEtapa","#fMine","#fPend"]) $(id).addEventListener("input", render);
 
-/* ---------- Abas ---------- */
+// abas
 const ABAS = [
   ["todas","Todas","layout-list","var(--marca)"],
   ["programada","Programadas","calendar-check","var(--s-plan)"],
@@ -77,7 +77,7 @@ function ajustarToolbar(){
   $("#fSearch").placeholder = pal ? "Buscar nota, cliente, transportadora, placa…" : "Buscar carga, nome, doca, placa, romaneio…";
 }
 
-/* ---------- Dados filtrados ---------- */
+// filtros
 function todasCargas(){
   const m = new Map(S.doDia);
   if ($("#fPend").checked) for (const [k,v] of S.pend) if (!m.has(k) && v.data < S.data) m.set(k,v);
@@ -128,7 +128,7 @@ function filtradasPal(){
     p=>[fmtNotas(p.notas),p.transportadora,p.placa,p.equipe,p.obs,p.obsOp,p.motorista].join(" "), pendenteDePal));
 }
 
-/* ---------- KPIs ---------- */
+// kpis
 const kpi = (ic, cor, valor, rotulo, sub="", extra="", cls="") =>
   `<div class="kpi ${cls}" style="--k:${cor}"><div class="kpi-icone">${icone(ic)}</div><div class="kpi-textos">
     <span class="kpi-valor">${valor}</span><span class="kpi-rotulo">${rotulo}</span>${sub?`<span class="kpi-sub">${sub}</span>`:""}${extra}</div></div>`;
@@ -153,7 +153,7 @@ function renderKpis(){
     kpi("alarm-clock", atr ? "#d03b3b" : "#7a8594", atr, "Em atraso", "dias anteriores", "", atr ? "alerta" : "");
 }
 
-/* ---------- Tabela genérica ---------- */
+// tabela
 function renderTable(tipo, cols, grupos, rows, cellFn, vazio, footFn){
   const spans = [];
   for (const c of cols){ if (spans.length && spans.at(-1).g===c.g) spans.at(-1).n++; else spans.push({g:c.g,n:1}); }
@@ -173,7 +173,7 @@ function render(){
   renderDatalists();
   ajustarAltura();
 }
-// a tabela ocupa toda a altura que sobra na tela (notebook ou monitor)
+// altura da tabela = resto da tela
 function ajustarAltura(){
   const w = $(".tablewrap"); if (!w || !w.offsetParent) return;
   if (innerWidth <= 860){ w.style.maxHeight = ""; return; }
@@ -191,7 +191,7 @@ $("#grid").addEventListener("click", e=>{
   if (tr) abrirDrawer(tr.dataset.tipo, tr.dataset.id);
 });
 
-/* ---------- Tabela de cargas ---------- */
+// cargas
 const COLS = [
   {g:"ge",k:"etapa",l:"Etapa"},
   {g:"gp",k:"carga",l:"Carga",sep:1},{g:"gp",k:"nome",l:"Nome da carga"},{g:"gp",k:"doca",l:"Doca"},{g:"gp",k:"cifFob",l:"CIF/FOB"},
@@ -240,7 +240,7 @@ function renderCargas(){
     col.k==="carga"?`${r.length} cargas`:col.k==="pedidos"?fmtI(sum("pedidos",r)):col.k==="cubagem"?fmtN(sum("cubagem",r),2):col.k==="peso"?fmtN(sum("peso",r),1):"");
 }
 
-/* ---------- Tabela de paletizadas ---------- */
+// paletizadas
 const PCOLS = [
   {g:"ge",k:"etapa",l:"Etapa"},
   {g:"gp",k:"notas",l:"Notas",sep:1},{g:"gp",k:"clientes",l:"Clientes"},{g:"gp",k:"transportadora",l:"Transportadora"},{g:"gp",k:"obs",l:"Obs / Entrega"},

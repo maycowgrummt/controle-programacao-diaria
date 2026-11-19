@@ -1,16 +1,9 @@
-/* =========================================================
-   MANUAL DO USUÁRIO
-   Botão "livro" no topo abre o manual (janela com menu de seções, busca e conteúdo).
-   O texto de cada seção fica na lista SECOES_MANUAL abaixo: para mudar uma
-   explicação, é só editar o texto da seção. AO MUDAR UMA REGRA OU FUNÇÃO DO
-   SISTEMA, ATUALIZAR AQUI TAMBÉM.
-   Primeiro acesso no aparelho: faixa "Novo por aqui?" no painel (uma vez só).
-   ========================================================= */
+// manual do usuario - texto das secoes fica em SECOES_MANUAL
 "use strict";
 
 const CHAVE_MANUAL_VISTO = "programacao_manual_visto";
 
-// Pequenos ajudantes para escrever o texto do manual
+// helpers
 const mIc = nome => icone(nome, 'class="man-ic"');
 const mDica = txt => `<p class="man-dica">${icone("lightbulb")}<span>${txt}</span></p>`;
 const mAtencao = txt => `<p class="man-dica man-atencao">${icone("triangle-alert")}<span>${txt}</span></p>`;
@@ -241,7 +234,7 @@ const SECOES_MANUAL = [
   },
 ];
 
-/* ---------- Montagem da janela ---------- */
+// janela
 let secaoManualEscolhida = null;
 const secoesManualVisiveis = () => SECOES_MANUAL.filter(s => !s.soAdmin || S.perfil?.setor === "admin");
 
@@ -278,7 +271,7 @@ function acenderMenuManual(id){
     if (ativo) b.scrollIntoView({block:"nearest", inline:"nearest"});
   });
 }
-// acende no menu a seção que está no topo da área de leitura
+// marca no menu a secao visivel
 function marcarMenuManual(){
   if (secaoManualEscolhida) return;
   const area = $("#manualConteudo"); if (!area) return;
@@ -288,7 +281,7 @@ function marcarMenuManual(){
   else vis.forEach(s=>{ if (s.offsetTop <= area.scrollTop + 40) atual = s; });
   acenderMenuManual(atual.dataset.manSecao);
 }
-// busca: mostra só as seções que têm todas as palavras digitadas
+// busca (todas as palavras)
 function filtrarManual(){
   const termos = norm($("#manualBusca").value).split(/\s+/).filter(Boolean);
   let algum = false;
@@ -309,6 +302,6 @@ $("#btnFecharFaixaManual").addEventListener("click", ()=>{
   try { localStorage.setItem(CHAVE_MANUAL_VISTO, "sim"); } catch {}
   $("#faixaManual").classList.add("hidden"); ajustarAltura();
 });
-// primeiro acesso neste aparelho: convite para ler o manual
+// faixa de 1o acesso
 (()=>{ let visto = false; try { visto = localStorage.getItem(CHAVE_MANUAL_VISTO) === "sim"; } catch { visto = true; }
   $("#faixaManual").classList.toggle("hidden", visto); })();
