@@ -170,7 +170,7 @@ const SECOES_MANUAL = [
   },
   { id:"paletizadas", titulo:"Coletas paletizadas", icone:"boxes", html:()=>`
     <p>Na aba <strong>${mIc("boxes")} Paletizadas</strong>, cada linha é uma <strong>coleta</strong>: um veículo que leva uma ou mais notas fiscais.</p>
-    ${mDica("Os pedidos do <strong>Logística Darnel</strong> chegam aqui sozinhos quando o Transporte de lá agenda a coleta, já com data, transportadora, notas, cliente, placa e motorista. Eles aparecem com a etiqueta <strong>Logística</strong>; daí para frente é igual às outras coletas.")}
+    ${mDica("Os pedidos do <strong>Logística Darnel</strong> chegam aqui sozinhos quando o Transporte de lá agenda a coleta, já com data, transportadora, notas, cliente, placa e motorista. Eles aparecem com a etiqueta <strong>Logística</strong>; daí para frente é igual às outras coletas. Se lá a NF, a data ou a agenda mudarem, a coleta aqui é atualizada sozinha; se o pedido for excluído lá, ela aparece como <strong>Cancelada</strong>.")}
     ${mPassos([
       `<strong>Planejamento ou Faturamento</strong> clica em <strong>${mIc("plus")} Nova coleta paletizada</strong>, informa a transportadora, a observação/agendamento e as <strong>notas fiscais com o cliente</strong> (botão "Adicionar nota" para cada uma).`,
       "<strong>Faturamento</strong> registra a chegada: hora, placa e motorista.",

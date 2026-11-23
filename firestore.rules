@@ -72,7 +72,7 @@ service cloud.firestore {
     function palCad()    { return ['data', 'transportadora', 'obs', 'notas']; }
     function palFat()    { return ['chegada', 'placa', 'motorista']; }
     function palOp()     { return ['inicio', 'termino', 'paletes', 'equipe', 'obsOp', 'crono']; }
-    function palOrigem() { return ['origem', 'pedidoLogistica']; }
+    function palOrigem() { return ['origem', 'pedidoLogistica', 'cancelada']; }
 
     match /paletizadas/{id} {
       allow read: if ativo();
