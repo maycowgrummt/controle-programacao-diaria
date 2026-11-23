@@ -68,18 +68,25 @@ service cloud.firestore {
       }
     }
 
-    // Coletas paletizadas (exceções lançadas manualmente)
-    function palCad()  { return ['data', 'transportadora', 'obs', 'notas']; }
-    function palFat()  { return ['chegada', 'placa', 'motorista']; }
-    function palOp()   { return ['inicio', 'termino', 'paletes', 'equipe', 'obsOp', 'crono']; }
+    // Coletas paletizadas (lançadas aqui ou vindas do Logística Darnel quando o Transporte agenda)
+    function palCad()    { return ['data', 'transportadora', 'obs', 'notas']; }
+    function palFat()    { return ['chegada', 'placa', 'motorista']; }
+    function palOp()     { return ['inicio', 'termino', 'paletes', 'equipe', 'obsOp', 'crono']; }
+    function palOrigem() { return ['origem', 'pedidoLogistica']; }
 
     match /paletizadas/{id} {
       allow read: if ativo();
-      allow create, delete: if ativo() && setor() in ['admin', 'planejamento', 'faturamento'];
+      allow create: if ativo() && (
+        setor() in ['admin', 'planejamento', 'faturamento']
+        || (setor() == 'transporte' && request.resource.data.origem == 'logistica')
+      );
+      allow delete: if ativo() && setor() in ['admin', 'planejamento', 'faturamento'];
       allow update: if ativo() && (
         setor() == 'admin'
-        || (setor() == 'planejamento' && changed().hasOnly(palCad().concat(meta())))
-        || (setor() == 'faturamento'  && changed().hasOnly(palCad().concat(palFat()).concat(meta())))
+        || (setor() == 'planejamento' && changed().hasOnly(palCad().concat(palOrigem()).concat(meta())))
+        || (setor() == 'faturamento'  && changed().hasOnly(palCad().concat(palFat()).concat(palOrigem()).concat(meta())))
+        || (setor() == 'transporte'   && resource.data.origem == 'logistica'
+                                      && changed().hasOnly(palCad().concat(palOrigem()).concat(meta())))
         || (setor() == 'operacao'     && changed().hasOnly(palOp().concat(meta())))
       );
 

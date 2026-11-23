@@ -253,7 +253,7 @@ function cellPal(p,col){
   const v = p[col.k];
   switch(col.k){
     case "etapa": { const e=etapaDe("pal",p); return `<span class="et et-${e}">${etapaLbl("pal",e)}</span>`; }
-    case "notas": return `<div class="stack">${(p.notas||[]).map(n=>`<div><b>${esc(n.nota)}</b></div>`).join("")}${p.data!==S.data?`<span class="tag">${brData(p.data).slice(0,5)}</span>`:""}</div>`;
+    case "notas": return `<div class="stack">${(p.notas||[]).map(n=>`<div><b>${esc(n.nota)}</b></div>`).join("")}${p.data!==S.data?`<span class="tag">${brData(p.data).slice(0,5)}</span>`:""}${p.origem==="logistica"?`<span class="tag" title="Veio do Logística Darnel (pedido ${esc(p.pedidoLogistica)})">Logística</span>`:""}</div>`;
     case "clientes": return `<div class="stack">${(p.notas||[]).map(n=>`<div>${esc(n.cliente)}</div>`).join("")}</div>`;
     case "obs": return `<div class="nome" style="max-width:240px" title="${esc(v)}">${esc(v)}</div>`;
     case "crono": return cronoCell("pal", p);
