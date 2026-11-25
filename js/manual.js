@@ -170,7 +170,7 @@ const SECOES_MANUAL = [
   },
   { id:"paletizadas", titulo:"Coletas paletizadas", icone:"boxes", html:()=>`
     <p>Na aba <strong>${mIc("boxes")} Paletizadas</strong>, cada linha é uma <strong>coleta</strong>: um veículo que leva uma ou mais notas fiscais.</p>
-    ${mDica("Os pedidos do <strong>Logística Darnel</strong> chegam aqui sozinhos quando o Transporte de lá agenda a coleta, já com data, transportadora, notas, cliente, placa e motorista. Eles aparecem com a etiqueta <strong>Logística</strong>; daí para frente é igual às outras coletas. Se lá a NF, a data ou a agenda mudarem, a coleta aqui é atualizada sozinha; se o pedido for excluído lá, ela aparece como <strong>Cancelada</strong>.")}
+    ${mDica("Os pedidos do <strong>Logística Darnel</strong> chegam aqui sozinhos quando o Transporte de lá agenda a coleta, já com data, transportadora, notas e cliente. Quando o caminhão chega, o Faturamento registra a chegada lá no Logística e a hora, a placa e o motorista vêm para cá sozinhos. Eles aparecem com a etiqueta <strong>Logística</strong>; daí para frente é igual às outras coletas. Se lá a NF, a data ou a agenda mudarem, a coleta aqui é atualizada sozinha; se o pedido for excluído lá, ela aparece como <strong>Cancelada</strong>.")}
     ${mPassos([
       `<strong>Planejamento ou Faturamento</strong> clica em <strong>${mIc("plus")} Nova coleta paletizada</strong>, informa a transportadora, a observação/agendamento e as <strong>notas fiscais com o cliente</strong> (botão "Adicionar nota" para cada uma).`,
       "<strong>Faturamento</strong> registra a chegada: hora, placa e motorista.",
@@ -199,7 +199,7 @@ const SECOES_MANUAL = [
   { id:"permissoes", titulo:"Quem pode fazer o quê", icone:"shield-check", html:()=>
     mTabela(["Setor","Pode"],[
       [mSetor("#15803d","Planejamento"), "Importar do WMS, criar carga extra/frigorífico, editar a seção Planejamento, mudar de dia, excluir carga, criar coleta paletizada."],
-      [mSetor("#7c3aed","Transporte"), "Transportadora que se apresentou, cubagem do veículo e previsão de chegada. As coletas paletizadas que o Transporte agenda no Logística Darnel entram aqui pela conta da pessoa."],
+      [mSetor("#7c3aed","Transporte"), "Transportadora que se apresentou, cubagem do veículo e previsão de chegada. As coletas paletizadas que o Transporte agenda no Logística Darnel entram aqui pela conta da pessoa (a chegada do veículo vem pela conta do Faturamento)."],
       [mSetor("#0072bc","Faturamento"), "Chegada do veículo, emissão (cronômetro, responsável, romaneio, observação), criar coleta paletizada e registrar a chegada dela."],
       [mSetor("#ea580c","Operação"), "Status, cronômetro do carregamento, paletes, equipe, sobra de espaço e observação; carregamento das coletas paletizadas."],
       [mSetor("#475569","Consulta"), "Só visualiza tudo, sem editar."],
